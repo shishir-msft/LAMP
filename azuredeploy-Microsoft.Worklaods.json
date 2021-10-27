@@ -170,10 +170,10 @@
 						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osDisk.sizeInGB]"
 					},
 					"controllerFileServerType": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks.storageType]"
+						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].storageType]"
 					},
 					"controllerFileServerDiskSize": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisk.sizeInGB]"
+						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].sizeInGB]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"

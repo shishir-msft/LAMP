@@ -202,66 +202,66 @@
 				},
 				"templateLink": {
 					"uri": "[concat(parameters('_artifactsLocation'), 'azuredeploy.json', parameters('_artifactsLocationSasToken'))]"
-				},
-				"outputs": {
-					"siteURL": {
-						"type": "string",
-						"value": "[parameters('wordpressInstanceResource').properties.siteUrl]"
-					},
-					"nodeResourceIds": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.nodeResourceIds]"
-					},
-					"vNetResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.vNetResourceId]"
-					},
-					"loadBalancerResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.loadBalancerResourceId]"
-					},
-					"azureFrontDoorResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.azureFrontDoorResourceId]"
-					},
-					"frontEndPublicIpResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.frontEndPublicIpResourceId]"
-					},
-					"outboundPublicIpResourceIds": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.outboundPublicIpResourceIds]"
-					},
-					"DbServerResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.databaseProfile.serverResourceId]"
-					},
-					"fileShareStorageResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.fileShareProfile.storageResourceId]"
-					},
-					"fileShareName": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.fileShareProfile.shareName]"
-					},
-					"cacheResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.cacheProfile.cacheResourceId]"
-					},
-					"backupVaultResourceId": {
-						"type": "string",
-						"value": "[parameters('phpWorkloadResource').properties.backupProfile.vaultResourceId]"
-					},
-					"DbName": {
-						"type": "string",
-						"value": "[parameters('wordpressInstanceResource').properties.databaseName]"
-					},
-					"DbUser": {
-						"type": "string",
-						"value": "[parameters('wordpressInstanceResource').properties.databaseUser]"
-					}
 				}
 			}
 		}
-	]
+	],
+	"outputs": {
+		"siteURL": {
+			"type": "string",
+			"value": "[parameters('wordpressInstanceResource').properties.siteUrl]"
+		},
+		"nodeResourceIds": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.controllerProfile.nodeResourceIds]"
+		},
+		"vNetResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.networkProfile.vNetResourceId]"
+		},
+		"loadBalancerResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.networkProfile.loadBalancerResourceId]"
+		},
+		"azureFrontDoorResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.networkProfile.azureFrontDoorResourceId]"
+		},
+		"frontEndPublicIpResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.networkProfile.frontEndPublicIpResourceId]"
+		},
+		"outboundPublicIpResourceIds": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.networkProfile.outboundPublicIpResourceIds]"
+		},
+		"DbServerResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.databaseProfile.serverResourceId]"
+		},
+		"fileShareStorageResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.fileShareProfile.storageResourceId]"
+		},
+		"fileShareName": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.fileShareProfile.shareName]"
+		},
+		"cacheResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.cacheProfile.cacheResourceId]"
+		},
+		"backupVaultResourceId": {
+			"type": "string",
+			"value": "[parameters('phpWorkloadResource').properties.backupProfile.vaultResourceId]"
+		},
+		"DbName": {
+			"type": "string",
+			"value": "[parameters('wordpressInstanceResource').properties.databaseName]"
+		},
+		"DbUser": {
+			"type": "string",
+			"value": "[parameters('wordpressInstanceResource').properties.databaseUser]"
+		}
+	}
 }

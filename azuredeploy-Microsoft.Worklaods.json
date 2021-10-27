@@ -179,7 +179,7 @@
 						"value": "[parameters('_artifactsLocation')]"
 					},
 					"redisDeploySwitch": {
-						"value": "[not(empty(parameters('phpWorkloadResource').cacheProfile))]"
+						"value": "[not(empty(parameters('phpWorkloadResource').properties.cacheProfile))]"
 					},
 					"htmlLocalCopySwitch": {
 						"value": true

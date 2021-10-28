@@ -983,11 +983,11 @@
         "documentation10": "GlusterFS Sizing guidance",
         "defaults": {
             "applicationDbName": "[parameters('CMSApplication')]",
-            "ctlrVmName": "[if(empty(parameters('ctlrVmName')), concat('controller-vm-',variables('resourceprefix')), parameters('ctlrVmName'))]",
+            "ctlrVmName": "[concat('controller-vm-',variables('resourceprefix'))]",
             "dbLoginPassword": "[concat(substring(uniqueString(resourceGroup().id, deployment().name), 2, 11), '*7', toUpper('pfiwb'))]",
             "dbUsername": "[concat(parameters('dbLogin'), '@', parameters('dbServerType'), '-', variables('resourceprefix'))]",
             "redisCacheName": "[concat('redis-',variables('resourceprefix'))]",
-            "vmssName": "[if(empty(parameters('vmssName')), concat('vmss-',variables('resourceprefix'), parameters('vmssName'))]"
+            "vmssName": "[concat('vmss-',variables('resourceprefix'))]"
         },
         "lampCommon": {
             "applicationDbName": "[if(empty(parameters('applicationDbName'), variables('defaults').applicationDbName, parameters('applicationDbName')))]",

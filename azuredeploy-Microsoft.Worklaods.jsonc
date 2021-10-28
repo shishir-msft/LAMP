@@ -7,7 +7,7 @@
 			"metadata": {
 				"description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
 			},
-			"defaultValue": "https://raw.githubusercontent.com/Azure/LAMP/master/"
+			"defaultValue": "https://raw.githubusercontent.com/shishir-msft/LAMP/3c9ae715b0d454af5b5a46784f5c9a099fa17ed8/"
 		},
 		"_artifactsLocationSasToken": {
 			"type": "securestring",
@@ -68,7 +68,7 @@
 						"value": "[parameters('phpWorkloadResource').properties.phpProfile.version]"
 					},
 					"dbServerType": {
-						"value": "[parameters('phpWorkloadResource').properties.databaseProfile.type]"
+						"value": "[toLower(parameters('phpWorkloadResource').properties.databaseProfile.type)]"
 					},
 					"dbLogin": {
 						"value": "[parameters('phpWorkloadResource').properties.databaseProfile.adminUser]"
@@ -95,86 +95,86 @@
 						"value": "[parameters('wordpressInstanceResource').properties.version]"
 					},
 					"azureBackupSwitch": {
-						"value": "[parameters('phpWorkloadResource').properties.backupProfile.backupEnabled]"
+						"value": "[equals(parameters('phpWorkloadResource').properties.backupProfile.backupEnabled, 'Enabled')]"
 					},
 					"fileServerType": {
-						"value": "[parameters('phpWorkloadResource').properties.fileShareProfile.shareType]"
+						"value": "[variables('mappings').fileServerType[parameters('phpWorkloadResource').properties.fileShareProfile.shareType]]"
 					},
 					"httpsTermination": {
-						"value": "[parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType]"
+						"value": "[variables('mappings').httpsTermination.whenLoadBalancerTypIs[parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType]]"
 					},
 					"mysqlVersion": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mysql'), parameters('phpWorkloadResource').properties.databaseProfile.version, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mysql'), parameters('phpWorkloadResource').properties.databaseProfile.version, variables('defaults').mysqlVersion)]"
 					},
 					"mssqlVersion": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.version, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.version, variables('defaults').mssqlVersion)]"
 					},
 					"postgresVersion": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'postgres'), parameters('phpWorkloadResource').properties.databaseProfile.version, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'postgres'), parameters('phpWorkloadResource').properties.databaseProfile.version, variables('defaults').postgresVersion)]"
 					},
 					"mysqlPgresStgSizeGB": {
-						"value": "[if(not(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql')), parameters('phpWorkloadResource').properties.databaseProfile.storageInGB, '')]"
+						"value": "[if(not(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql')), parameters('phpWorkloadResource').properties.databaseProfile.storageInGB, variables('defaults').mysqlPgresStgSizeGB)]"
 					},
 					"mssqlDbSize": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.storageInGB, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.storageInGB, variables('defaults').mssqlDbSize)]"
 					},
 					"mysqlPgresSkuTier": {
-						"value": "[if(not(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql')), parameters('phpWorkloadResource').properties.databaseProfile.tier, '')]"
+						"value": "[if(not(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql')), parameters('phpWorkloadResource').properties.databaseProfile.tier, variables('defaults').mysqlPgresSkuTier)]"
 					},
 					"mssqlDbEdition": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.tier, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.databaseProfile.type, 'mssql'), parameters('phpWorkloadResource').properties.databaseProfile.tier, variables('defaults').mssqlDbEdition)]"
 					},
 					"appGwSkuName": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'ApplicationGateway'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'ApplicationGateway'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, variables('defaults').appGwSkuName)]"
 					},
 					"loadBalancerSku": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'LoadBalancer'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'LoadBalancer'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, variables('defaults').loadBalancerSku)]"
 					},
 					"appGwSkuTier": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'ApplicationGateway'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'ApplicationGateway'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, variables('defaults').appGwSkuTier)]"
 					},
 					"loadBalancerTier": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'LoadBalancer'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerSku, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.networkProfile.loadBalancerType, 'LoadBalancer'), parameters('phpWorkloadResource').properties.networkProfile.loadBalancerTier, variables('defaults').loadBalancerTier)]"
 					},
 					"storageAccountType": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.fileShareProfile.shareType, 'AzureFiles'), parameters('phpWorkloadResource').properties.fileShareProfile.storageType, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.fileShareProfile.shareType, 'AzureFiles'), parameters('phpWorkloadResource').properties.fileShareProfile.storageType, variables('defaults').storageAccountType)]"
 					},
 					"fileServerDiskSize": {
-						"value": "[if(equals(parameters('phpWorkloadResource').properties.fileShareProfile.shareType, 'AzureFiles'), parameters('phpWorkloadResource').properties.fileShareProfile.shareSizeInGB, '')]"
+						"value": "[if(equals(parameters('phpWorkloadResource').properties.fileShareProfile.shareType, 'AzureFiles'), int(parameters('phpWorkloadResource').properties.fileShareProfile.shareSizeInGB), variables('defaults').fileServerDiskSize)]"
 					},
-					"webNodesOsSku": {
-						"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osImage.sku]"
-					},
-					"webNodesOsDiskStorageType": {
-						"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osDisk.storageType]"
-					},
-					"webNodesOsDiskSizeInGb": {
-						"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osDisk.sizeInGB]"
-					},
-					"controllerOsOffer": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.offer]"
-					},
-					"controllerOsPublisher": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.publisher]"
-					},
-					"controllerOsSku": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.sku]"
-					},
-					"controllerOsVersion": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.version]"
-					},
-					"controllerOsDiskStorageType": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osDisk.storageType]"
-					},
-					"controllerOsDiskSizeInGb": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osDisk.sizeInGB]"
-					},
-					"controllerFileServerType": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].storageType]"
-					},
-					"controllerFileServerDiskSize": {
-						"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].sizeInGB]"
-					},
+					// "webNodesOsSku": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osImage.sku]"
+					// },
+					// "webNodesOsDiskStorageType": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osDisk.storageType]"
+					// },
+					// "webNodesOsDiskSizeInGb": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.webNodesProfile.osDisk.sizeInGB]"
+					// },
+					// "controllerOsOffer": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.offer]"
+					// },
+					// "controllerOsPublisher": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.publisher]"
+					// },
+					// "controllerOsSku": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.sku]"
+					// },
+					// "controllerOsVersion": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osImage.version]"
+					// },
+					// "controllerOsDiskStorageType": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osDisk.storageType]"
+					// },
+					// "controllerOsDiskSizeInGb": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.osDisk.sizeInGB]"
+					// },
+					// "controllerFileServerType": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].storageType]"
+					// },
+					// "controllerFileServerDiskSize": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.controllerProfile.dataDisks[0].sizeInGB]"
+					// },
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"
 					},
@@ -185,20 +185,22 @@
 						"value": true
 					},
 					"CMSApplication": {
-						"value": "[parameters('phpWorkloadResource').kind]"
-					},
-					"siteWebServerType": {
-						"value": "[parameters('phpWorkloadResource').properties.siteProfile.webServerType]"
-					},
-					"cacheSku": {
-						"value": "[parameters('phpWorkloadResource').properties.cacheProfile.skuName]"
-					},
-					"cacheFamily": {
-						"value": "[parameters('phpWorkloadResource').properties.cacheProfile.family]"
-					},
-					"cacheCapacity": {
-						"value": "[parameters('phpWorkloadResource').properties.cacheProfile.capacity]"
+						"value": "[variables('mappings').CMSApplication[parameters('phpWorkloadResource').kind]]"
 					}
+					// ,
+					// Following field has been removed from latest RPSaaS Swagger.
+					// "siteWebServerType": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.siteProfile.webServerType]"
+					// },
+					// "cacheSku": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.cacheProfile.skuName]"
+					// },
+					// "cacheFamily": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.cacheProfile.family]"
+					// },
+					// "cacheCapacity": {
+					// 	"value": "[parameters('phpWorkloadResource').properties.cacheProfile.capacity]"
+					// }
 				},
 				"templateLink": {
 					"uri": "[concat(parameters('_artifactsLocation'), 'azuredeploy.json', parameters('_artifactsLocationSasToken'))]"
@@ -206,6 +208,40 @@
 			}
 		}
 	],
+	"variables": {
+		"documentation1": "mappings variable maps values from RP to azuredeploy.json. For example, RP sends 'ApplicationGateway' while azuredeploy.json expects 'AppGw'",
+		"mappings": {
+			"httpsTermination": {
+				"whenLoadBalancerTypIs": {
+					"ApplicationGateway": "AppGw",
+					"LoadBalancer": "VMSS"
+				}
+			},
+			"fileServerType": {
+				"AzureFiles": "azurefiles",
+				"NfsOnController": "nfs"
+			},
+			"CMSApplication": {
+				"Wordpress": "WordPress"
+			}
+		},
+		"documentation2": "defaults variable contains defaults for various parameters used in azuredeploy.json",
+		"defaults": {
+			"mysqlVersion": "5.7",
+			"mssqlVersion": "12.0",
+			"postgresVersion": "9.6",
+			"mysqlPgresStgSizeGB": "",
+			"mssqlDbSize": "250GB",
+			"mysqlPgresSkuTier": "GeneralPurpose",
+			"mssqlDbEdition": "Standard",
+			"appGwSkuName": "Standard_v2",
+			"loadBalancerSku": "Standard",
+			"appGwSkuTier": "Standard_v2",
+			"loadBalancerTier": "Regional",
+			"storageAccountType": "Standard_LRS",
+			"fileServerDiskSize": 127
+		}
+	},
 	"outputs": {
 		"siteURL": {
 			"type": "string",
@@ -263,5 +299,6 @@
 			"type": "string",
 			"value": "[parameters('wordpressInstanceResource').properties.databaseUser]"
 		}
+	
 	}
 }

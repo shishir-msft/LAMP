@@ -2,7 +2,7 @@
 <h3 align="center">Getting Started with Scalable WordPress on Azure</h3>
 
   <p align="left">
-    This guide will help you get started with the Private Preview for the scalable WordPress on Azure. Once deployed, there are optional steps you can take to customize your post-deployment experience.
+    This guide will help you get started with the Private Preview for the scalable WordPress on Azure. Once your workload is deployed, there are optional steps you can take to customize your post-deployment experience.
   </p>
    <p align="center">
   <br/>

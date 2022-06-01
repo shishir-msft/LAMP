@@ -216,8 +216,8 @@ function install_plugins {
     local path=$1
     # Commenting the plugin install as Azure Cache for Redis is not currently being deployed
     # Uncomment or replace with appropriate plugin when Redis Cache infrastructure is deployed again
-    # wp plugin install w3-total-cache --path=$path --allow-root
-    # wp plugin activate w3-total-cache --path=$path --allow-root
+    wp plugin install w3-total-cache --path=$path --allow-root
+    wp plugin activate w3-total-cache --path=$path --allow-root
     wp plugin activate akismet --path=$path --allow-root
     chown -R www-data:www-data $path
 }

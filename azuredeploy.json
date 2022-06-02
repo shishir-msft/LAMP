@@ -35,7 +35,7 @@
             "type": "bool"
         },
         "redisDeploySwitch": {
-            "defaultValue": false,
+            "defaultValue": true,
             "metadata": {
                 "description": "Switch to deploy a Redis Cache or not."
             },
@@ -104,6 +104,7 @@
             "type": "string"
         },
         "sshPublicKey": {
+            "defaultValue": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9p1cDFh/+UeeccSh8VhdxrmyTNc07t6YEh++naROPcSNfN9kPmGwGOkCtUaAmGbQgVLW3VkGs5Kc0va7s7uHuqy3D8KnXSTlCduOD0vEiCKm2DFU0abEmu8vGBlyyj7T+phoDYWZcm+EwiIokR3EAtlMvNPIbRFu7nlfsOF7A0Y7h6Huk1NjNxRwuFEIR+4qFnzIi/krYNbAfZlK3vxyLH2eK89Vgf5/FXYjR8VGHtZ5FPPyU14X0nyfN6x3oLj4swDBIAU1UJdsniTKuG0x5IsqAdzh35MYL3+L8wn+TvnJ5xvNXSCHYvXowXnhMQMpfKuOX4r85IwxhGuMnlSR9 fareast\\shig@SHIG-PC",
             "metadata": {
                 "description": "ssh public key"
             },

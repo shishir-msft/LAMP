@@ -44,7 +44,7 @@
                 "parameters": {
                     "_artifactsLocation":           { "value": "[parameters('_artifactsLocation')]" },
                     "_artifactsLocationSasToken":   { "value": "[parameters('_artifactsLocationSasToken')]" },
-                    "redisDeploySwitch":            { "value": false },
+                    "redisDeploySwitch":            { "value": true },
                     "sshPublicKey":                 { "value": "[parameters('sshPublicKey')]" },
                     "mysqlPgresVcores":             { "value": 8 },
                     "mysqlPgresStgSizeGB":          { "value": 128 },
